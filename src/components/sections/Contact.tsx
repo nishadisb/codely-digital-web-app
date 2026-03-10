@@ -1,13 +1,58 @@
-import { Button, Input, Form, Row, Col, Select } from 'antd';
+import { Button, Input, Form, Row, Col, Select, message } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import footerShape from '../../assets/3D Black Chrome Shape1.png';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
     const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
 
-    const onFinish = (values: any) => {
-        console.log('Form values:', values);
+    const onFinish = async (values: any) => {
+        setLoading(true);
+        
+        try {
+            // EmailJS configuration - get these from your EmailJS dashboard
+            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+
+            // Map message value to readable label
+            const messageLabels: Record<string, string> = {
+                consultation: 'Request a consultation',
+                support: 'Technical support',
+                partnership: 'Partnership enquiry',
+                other: 'Other'
+            };
+
+            // Prepare template parameters
+            const templateParams = {
+                user_name: values.fullName,
+                user_email: values.email,
+                phone: values.phone || 'Not provided',
+                company_name: values.company || 'Not provided',
+                message: messageLabels[values.message] || values.message,
+                to_email: 'hnishadisathsarani@gmail.com', // Your receiving email
+            };
+
+            // Send email using EmailJS
+            await emailjs.send(
+                serviceId,
+                templateId,
+                templateParams,
+                publicKey
+            );
+
+            message.success('Message sent successfully! We\'ll get back to you soon.');
+            form.resetFields();
+            
+        } catch (error) {
+            console.error('Error sending message:', error);
+            message.error('Failed to send message. Please try again later.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -120,8 +165,10 @@ const Contact = () => {
                             >
                                 <Select 
                                     placeholder="Select an option"
-                                    variant="borderless"
+                                    variant="underlined"
                                     className="custom-select"
+                                 style={{ backgroundColor: 'transparent', color: 'grey' }}
+                                   
                                     options={[
                                         { value: 'consultation', label: 'Request a consultation' },
                                         { value: 'support', label: 'Technical support' },
@@ -135,11 +182,13 @@ const Contact = () => {
                                 type="primary"
                                 htmlType="submit"
                                 size="large"
-                                className="bg-white text-[#006FEA] border-0 h-12 px-8 rounded-full font-semibold text-base mt-6 hover:bg-[#83BEFF] hover:scale-105 transition-all shadow-lg"
+                                loading={loading}
+                                disabled={loading}
+                                className="bg-white text-[#006FEA] border-0 h-12 px-8 rounded-full font-semibold text-base mt-6 hover:bg-[#83BEFF] hover:scale-105 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                                 icon={<SendOutlined />}
                                 iconPosition="end"
                             >
-                                Send a message
+                                {loading ? 'Sending...' : 'Send a message'}
                             </Button>
                         </Form>
                     </div>
