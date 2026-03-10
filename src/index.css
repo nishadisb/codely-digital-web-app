@@ -23,3 +23,37 @@
     min-height: 100vh;
   }
 }
+
+/* Custom Select Styles for Dark Theme */
+.custom-select .ant-select-selector {
+  background-color: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
+.custom-select .ant-select-selection-placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.custom-select .ant-select-arrow {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Dropdown menu styles */
+.dark-dropdown {
+  background-color: #0a1525 !important;
+}
+
+.dark-dropdown .ant-select-item {
+  color: white !important;
+  background-color: transparent !important;
+}
+
+.dark-dropdown .ant-select-item-option-selected {
+  background-color: rgba(0, 111, 234, 0.2) !important;
+}
+
+.dark-dropdown .ant-select-item-option-active {
+  background-color: rgba(0, 111, 234, 0.1) !important;
+}
