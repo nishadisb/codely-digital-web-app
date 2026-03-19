@@ -260,8 +260,8 @@ const Services = () => {
                     </Row>
                 </section>
             </div>
-
             <AnimatedCrossBanner />
+
         </>
     );
 };
