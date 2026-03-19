@@ -217,7 +217,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects-section" className="relative overflow-hidden bg-[#061B3A]">
+    <section id="projects-section" className="relative overflow-hidden bg-[#081426]">
       {/* <div className="h-[120px]" /> */}
 
       <div className="absolute inset-0 z-0 pointer-events-none">

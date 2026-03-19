@@ -1,6 +1,6 @@
 import { Button, Input, Form, Row, Col, Select, message } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
-import footerShape from '../../assets/3D Black Chrome Shape1.png';
+import CurveLines from '../../assets/CurveLines.png';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
@@ -9,9 +9,29 @@ const Contact = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.2
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5, ease: 'easeOut' }
+        }
+    };
+
     const onFinish = async (values: any) => {
         setLoading(true);
-        
+
         try {
             // EmailJS configuration - get these from your EmailJS dashboard
             const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
@@ -46,7 +66,7 @@ const Contact = () => {
 
             message.success('Message sent successfully! We\'ll get back to you soon.');
             form.resetFields();
-            
+
         } catch (error) {
             console.error('Error sending message:', error);
             message.error('Failed to send message. Please try again later.');
@@ -56,39 +76,34 @@ const Contact = () => {
     };
 
     return (
-        <section className="container mx-auto px-6 py-24 relative overflow-hidden bg-[#0a1525] rounded-3xl min-h-screen">
-           
-            
+        <section className="relative overflow-hidden bg-[#081426] py-20 px-6 md:px-12 ">
+
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <img
+                    src={CurveLines}
+                    alt="curve lines"
+                    className="w-full h-full object-cover opacity-10 md:opacity-20"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#061B3A]/20 via-[#061B3A]/60 to-[#061B3A]" />
+            </div>
+
+
+
             {/* 3D Shape at bottom center - rotating from below */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-80 h-80 pointer-events-none z-99">
+            {/* <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-80 h-80 pointer-events-none z-99">
                 <motion.div
                     className="w-full h-full flex items-center justify-center"
-                   // initial={{ y: 200, opacity: 0, rotate: -15 }}
-                    // animate={{ 
-                    //     y: 0, 
-                    //     opacity: 0.6,
-                    //     rotate: [0, 360, 0]
-                    // }}
-                       initial={{ y: "100%" }}
-                         animate={{ y: 0,  rotate: [360, 0, 0] }}
-                        transition={{
-                                type: "spring",
-                                stiffness: 40,
-                                damping: 30,
-                                 duration: 1.5,
-                                 rotate: {
-                                    duration: 8,
-                                 }
-                            }}
-                    // transition={{
-                    //     y: { duration: 1.5, type: "spring", bounce: 0.2 },
-                    //     opacity: { duration: 1.5 },
-                    //     rotate: {
-                    //         duration: 8,
-                    //         repeat: Infinity,
-                    //         ease: "easeInOut"
-                    //     }
-                    // }}
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0, rotate: [360, 0, 0] }}
+                    transition={{
+                        type: "spring",
+                        stiffness: 40,
+                        damping: 30,
+                        duration: 1.5,
+                        rotate: {
+                            duration: 8,
+                        }
+                    }}
                 >
                     <img
                         src={footerShape}
@@ -96,143 +111,150 @@ const Contact = () => {
                         className="w-full h-full object-contain drop-shadow-[0_0_80px_rgba(0,111,234,0.3)]"
                     />
                 </motion.div>
-            </div>
+            </div> */}
 
-            <Row gutter={[64, 64]} className="relative z-20">
-                <Col xs={24} lg={12}>
-                    <div className="space-y-6 relative z-10">
-                        {/* Blue accent line */}
-                        <div className="border-l-4 border-[#006FEA] pl-6">
-                            <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-                                Do you have<br />
-                                <span className="text-gray-500">any questions?</span>
+            <div className="relative z-20 max-w-6xl mx-auto">
+
+                {/* TOP HEADER (LEFT + RIGHT TEXT) */}
+                <motion.div
+                    className="flex flex-col lg:flex-row justify-between lg:items-end mb-12 gap-6"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                >
+
+                    {/* LEFT TITLE */}
+                    <motion.div variants={itemVariants}>
+                        <div>
+                            <h2 className="text-4xl md:text-6xl font-light text-white leading-tight">
+                                Do you have <br />
+                                any questions?
                             </h2>
+                            <p className="text-gray-400 text-sm mt-4 max-w-md">
+                                Feel free to send us your questions or request a free consultation.
+                            </p>
                         </div>
-                        <p className="text-gray-400 text-sm max-w-md pl-6">
-                            Feel free to send us your questions or request a free consultation.
-                        </p>
+                    </motion.div>
 
-                        <Form
-                            form={form}
-                            onFinish={onFinish}
-                            layout="vertical"
-                            className="space-y-4 pt-6 pl-6"
-                            requiredMark={false}
-                        >
-                            <Row gutter={[16, 8]}>
-                                <Col xs={24} sm={12}>
+                    <motion.div variants={itemVariants} className="max-w-sm">
+                        {/* RIGHT SMALL TEXT */}
+                        <div className="max-w-sm">
+                            <p className="text-gray-400 text-sm">
+                                It is necessary to wash the car before tinting, as it affects the quality of the work.
+                            </p>
+                        </div>
+                    </motion.div>
+                </motion.div>
+
+                {/* FORM */}
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                >
+                    <Form
+                        form={form}
+                        onFinish={onFinish}
+                        layout="vertical"
+                        requiredMark={false}
+                    >
+                        {/* ROW 1 */}
+                        <motion.div variants={itemVariants}>
+                            <Row gutter={[32, 24]}>
+                                <Col xs={24} md={12}>
                                     <Form.Item
                                         name="fullName"
-                                        label={<span className="text-white text-sm font-medium">Full Name*</span>}
+                                        label={<span className="text-white text-sm">Full Name*</span>}
                                         rules={[{ required: true, message: 'Please input your name!' }]}
                                     >
-                                        <Input variant="underlined" placeholder="(Name)" />
+                                        <Input variant="underlined" placeholder="Full Name" />
                                     </Form.Item>
                                 </Col>
-                                <Col xs={24} sm={12}>
+
+                                <Col xs={24} md={12}>
                                     <Form.Item
                                         name="phone"
-                                        label={<span className="text-white text-sm font-medium">Phone Number*</span>}
-                                        rules={[{ required: true }]}
+                                        label={<span className="text-white text-sm">Phone Number</span>}
                                     >
-                                        <Input variant="underlined" placeholder="(Optional)" />
+                                        <Input variant="underlined" placeholder="Phone Number" />
                                     </Form.Item>
                                 </Col>
                             </Row>
-                            <Row gutter={[16, 8]}>
-                                <Col xs={24} sm={12}>
+                        </motion.div>
+
+                        {/* ROW 2 */}
+                        <motion.div variants={itemVariants}>
+                            <Row gutter={[32, 24]}>
+                                <Col xs={24} md={12}>
                                     <Form.Item
                                         name="company"
-                                        label={<span className="text-white text-sm font-medium">Company Name*</span>}
+                                        label={<span className="text-white text-sm">Company Name</span>}
                                     >
-                                        <Input variant="underlined" placeholder="(Company)" />
+                                        <Input variant="underlined" placeholder="Company" />
                                     </Form.Item>
                                 </Col>
-                                <Col xs={24} sm={12}>
+
+                                <Col xs={24} md={12}>
                                     <Form.Item
                                         name="email"
-                                        label={<span className="text-white text-sm font-medium">Email*</span>}
+                                        label={<span className="text-white text-sm">Email*</span>}
                                         rules={[{ required: true, type: 'email' }]}
                                     >
-                                        <Input variant="underlined" placeholder="name@email.com" />
+                                        <Input variant="underlined" placeholder="Email address" />
                                     </Form.Item>
                                 </Col>
                             </Row>
-                            <Form.Item
-                                name="message"
-                                label={<span className="text-white text-sm font-medium">How can we help?</span>}
-                                rules={[{ required: true }]}
-                            >
-                                <Select 
-                                    placeholder="Select an option"
-                                    variant="underlined"
-                                    className="custom-select"
-                                 style={{ backgroundColor: 'transparent', color: 'grey' }}
-                                   
-                                    options={[
-                                        { value: 'consultation', label: 'Request a consultation' },
-                                        { value: 'support', label: 'Technical support' },
-                                        { value: 'partnership', label: 'Partnership enquiry' },
-                                        { value: 'other', label: 'Other' }
-                                    ]}
-                                />
-                            </Form.Item>
+                        </motion.div>
 
+                        {/* SELECT */}
+                        <motion.div variants={itemVariants}>
+                            <Row gutter={[32, 24]}>
+                                <Col xs={24} md={12}>
+                                    <Form.Item
+                                        name="message"
+                                        label={<span className="text-white text-sm">How can we help?</span>}
+                                        rules={[{ required: true }]}
+                                    >
+                                        <Select
+                                            placeholder="Select an option"
+                                            variant="underlined"
+                                            className="custom-select"
+                                            style={{ backgroundColor: 'transparent', color: 'white' }}
+
+                                            options={[
+                                                { value: 'consultation', label: 'Request a consultation' },
+                                                { value: 'support', label: 'Technical support' },
+                                                { value: 'partnership', label: 'Partnership enquiry' },
+                                                { value: 'other', label: 'Other' }
+                                            ]}
+                                        />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                        </motion.div>
+
+                        {/* BUTTON */}
+                        <motion.div
+                            variants={itemVariants}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             <Button
                                 type="primary"
                                 htmlType="submit"
                                 size="large"
                                 loading={loading}
-                                disabled={loading}
-                                className="bg-white text-[#006FEA] border-0 h-12 px-8 rounded-full font-semibold text-base mt-6 hover:bg-[#83BEFF] hover:scale-105 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="bg-white text-[#006FEA] border-0 h-12 px-8 rounded-full font-semibold mt-6 hover:bg-[#83BEFF] transition-all"
                                 icon={<SendOutlined />}
                                 iconPosition="end"
                             >
                                 {loading ? 'Sending...' : 'Send a message'}
                             </Button>
-                        </Form>
-                    </div>
-                </Col>
-                
-                {/* Info box on the right */}
-                <Col xs={24} lg={12}>
-                    <div className="relative z-10 flex items-center justify-end h-full">
-                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 max-w-md">
-                            <p className="text-gray-300 text-base leading-relaxed">
-                                It is necessary to wash the car before tinting, as it affects the quality of the work.
-                            </p>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
-
-            {/* Footer Section */}
-            <div className="absolute bottom-12 left-0 right-0 px-12 flex justify-between items-end z-30">
-                {/* Contact Info */}
-                <div className="space-y-4">
-                    <div>
-                        <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">CALL US NOW</p>
-                        <p className="text-white text-lg font-semibold">033 666 666 66</p>
-                    </div>
-                    <div>
-                        <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">EMAIL</p>
-                        <p className="text-white text-base">info@codely.com.au</p>
-                    </div>
-                </div>
-
-                {/* Branding */}
-                <div className="max-w-xs text-right">
-                    <div className="flex items-center justify-end gap-2 mb-2">
-                        <div className="w-6 h-6 bg-[#006FEA] rounded-full flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">C</span>
-                        </div>
-                        <span className="text-white text-xl font-bold">codely</span>
-                    </div>
-                    <p className="text-gray-400 text-xs">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry.
-                    </p>
-                    <p className="text-gray-600 text-xs mt-2">© 2026 — Copyright</p>
-                </div>
+                        </motion.div>
+                    </Form>
+                </motion.div>
             </div>
         </section>
     );
