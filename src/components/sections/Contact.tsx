@@ -38,6 +38,7 @@ const Contact = () => {
             // EmailJS configuration - get these from your EmailJS dashboard
             const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
             const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+            const autoReplyTemplateId = import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID || 'YOUR_AUTO_REPLY_TEMPLATE_ID';
             const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
 
             // Map message value to readable label
@@ -48,21 +49,38 @@ const Contact = () => {
                 other: 'Other'
             };
 
-            // Prepare template parameters
+            // Prepare template parameters for main email
             const templateParams = {
                 user_name: values.fullName,
                 user_email: values.email,
                 phone: values.phone || 'Not provided',
                 company_name: values.company || 'Not provided',
-                message: messageLabels[values.message] || values.message,
+                title: messageLabels[values.message] || values.message,
                 to_email: 'hnishadisathsarani@gmail.com', // Your receiving email
             };
 
-            // Send email using EmailJS
+            // Send main email to business
             await emailjs.send(
                 serviceId,
                 templateId,
                 templateParams,
+                publicKey
+            );
+
+            // Send auto-reply email to user
+            const autoReplyParams = {
+                to_email: values.email, // Recipient's email
+                user_name: values.fullName,
+                user_email: values.email,
+                company_name: values.company || 'your company',
+                phone: values.phone || 'Not provided',
+                message_type: messageLabels[values.message] || values.message,
+            };
+
+            await emailjs.send(
+                serviceId,
+                autoReplyTemplateId,
+                autoReplyParams,
                 publicKey
             );
 
@@ -156,7 +174,7 @@ const Contact = () => {
                                             name="phone"
                                             label={<span className="text-white text-sm">Phone Number</span>}
                                         >
-                                            <Input variant="underlined" placeholder="Phone Number" />
+                                            <Input variant="underlined" placeholder="Phone Number" max={12} />
                                         </Form.Item>
                                     </Col>
                                 </Row>

@@ -1,18 +1,25 @@
-import { MenuOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
+import { Link, useLocation } from 'react-router-dom';
+import logo from "../../assets/logo.png";
 
 const Header = () => {
+    const location = useLocation();
+    const isHomePage = location.pathname === '/';
+
     return (
-        <header className="container mx-auto px-6 py-6 flex justify-between items-center relative z-40">
-            <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#006FEA] rounded-full flex items-center justify-center shadow-lg shadow-[#006FEA]/50">
-                    <span className="text-white font-bold text-xl">C</span>
-                </div>
-                <span className="text-2xl font-bold tracking-tight">codely</span>
+        <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 lg:px-20 py-3 flex items-center justify-between">
+            <div className="flex items-center">
+                {/* <img src={logo} alt="Codely" className="h-7 md:h-9 object-contain" /> */}
             </div>
-           
-            <Link to="/menu" className="md:hidden text-white text-2xl">
-                <MenuOutlined />
+            
+            <Link to={isHomePage ? "/home" : "/"}>
+                <button className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all duration-300">
+                    {isHomePage ? (
+                        <CloseOutlined className="text-white text-2xl" />
+                    ) : (
+                        <MenuOutlined className="text-white text-2xl" />
+                    )}
+                </button>
             </Link>
         </header>
     );

@@ -9,18 +9,10 @@ import Footer from './components/sections/Footer';
 import MenuPage from './components/MenuPage';
 import './App.css';
 import HomePage from './components/sections/HomePage';
+import Home from './components/sections/Home';
+import Header from './components/sections/Header';
 
-const Home = () => (
-  <>
-    
-    <Hero />
-    <Services />
-    <Projects />
-    <Partners />
-    <Contact />
-    <Footer />
-  </>
-);
+
 
 function AppContent() {
   const location = useLocation();
@@ -29,6 +21,7 @@ function AppContent() {
     <div className="h-screen min-h-screen bg-[#081426] text-white font-sans overflow-x-hidden">
       <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none z-50"></div>
       <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent blur-3xl" />
+      <Header />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<HomePage />} />
