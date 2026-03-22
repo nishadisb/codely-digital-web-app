@@ -1,7 +1,7 @@
 import { Button, Input, Form, Row, Col, Select, message } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import CurveLines from '../../assets/CurveLines.png';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import footerShape from "../../assets/3D Black Chrome Shape1.png";
@@ -21,7 +21,7 @@ const Contact = () => {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { opacity: 0, y: 30 },
         visible: {
             opacity: 1,
@@ -30,6 +30,7 @@ const Contact = () => {
         }
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onFinish = async (values: any) => {
         setLoading(true);
 

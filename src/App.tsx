@@ -1,9 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import Header from './components/sections/Header';
 import Hero from './components/sections/Hero';
 import Services from './components/sections/Services';
-import Banner from './components/sections/Banner';
 import Projects from './components/sections/Projects';
 import Partners from './components/sections/Partners';
 import Contact from './components/sections/Contact';
@@ -11,15 +9,12 @@ import Footer from './components/sections/Footer';
 import MenuPage from './components/MenuPage';
 import './App.css';
 import HomePage from './components/sections/HomePage';
-import AnimatedCrossBanner from './components/sections/Banner';
-
 
 const Home = () => (
   <>
     
     <Hero />
     <Services />
-    {/* <AnimatedCrossBanner /> */}
     <Projects />
     <Partners />
     <Contact />

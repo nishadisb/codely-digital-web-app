@@ -35,9 +35,10 @@ const HomePage = () => {
 
     const menuItems = [
         { title: "Home", path: "/home" },
-        { title: "About Us", path: "/about" },
-        { title: "What We Do", path: "/services", hasSub: true },
-        { title: "Recent Projects", path: "/projects", hasSub: true },
+        // { title: "About Us", path: "/about" },
+        { title: "What We Do", path: "/services" },
+        // { title: "Recent Projects", path: "/projects", hasSub: true },
+        { title: "Recent Projects", path: "/projects" },
         { title: "Contact Us", path: "/contact" },
     ];
 

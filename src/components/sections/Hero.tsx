@@ -1,6 +1,6 @@
 import { Button, Statistic } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import CountUp from "react-countup";
 
 import abstract3D from "../../assets/3D Abstract3.png";
@@ -29,7 +29,7 @@ const stats = [
 ];
 
 const Hero = () => {
-    const panelRef = useRef(null);
+    const panelRef = useRef<HTMLDivElement | null>(null);
     const [stripeCount, setStripeCount] = useState(12);
 
     const container = {
@@ -41,7 +41,7 @@ const Hero = () => {
         },
     };
 
-    const tag = {
+    const tag: Variants = {
         hidden: {
             opacity: 0,
             y: 20,
