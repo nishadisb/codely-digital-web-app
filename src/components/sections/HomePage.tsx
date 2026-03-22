@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { RightOutlined } from "@ant-design/icons";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import blackChromeShape from "../../assets/3D Black Chrome Shape.png";
@@ -107,10 +106,10 @@ const HomePage = () => {
                                 >
                                     {item.title}
                                 </span>
-
-                                {item.hasSub && (
+{/* 
+                                {item?.hasSub && (
                                     <RightOutlined className="ml-2 mt-1 sm:mt-2 text-slate-500 text-lg sm:text-xl group-hover:text-white transition-colors" />
-                                )}
+                                )} */}
                             </Link>
                         </motion.div>
                     ))}
