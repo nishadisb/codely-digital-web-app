@@ -1,58 +1,68 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-import PassImage from "../../assets/PassImage.png";
-import PassLogo from "../../assets/PassLogo.png";
-import DeltaImage from "../../assets/DeltaImage.png";
-import DeltaMobile from "../../assets/DeltaMobile.png";
-import DeltaLogo from "../../assets/DeltaLogo.png";
-import Blur1 from "../../assets/Blur1.png";
-import Blur2 from "../../assets/Blur2.png";
+import CardBody from "../../assets/ProjectsImages/CardBody.png";
+import PassImage from "../../assets/ProjectsImages/PassImage.png";
+import PassLogo from "../../assets/ProjectsImages/PassLogo.png";
+
+import EvovoltImage from "../../assets/ProjectsImages/EvovoltImage.png";
+import EvovoltMobile from "../../assets/ProjectsImages/EvovoltMobile.png";
+import EvovoltLogo from "../../assets/ProjectsImages/EvovoltLogo.png";
+
+import EzycleanImage from "../../assets/ProjectsImages/EzycleanImage.png";
+import EzycleanMobile from "../../assets/ProjectsImages/EzycleanMobile.png";
+import EzycleanLogo from "../../assets/ProjectsImages/EzycleanLogo.png";
+
+import TarraleahImage from "../../assets/ProjectsImages/TarraleahImage.png";
+import TarraleahMobile from "../../assets/ProjectsImages/TarraleahMobile.png";
+import TarraleahLogo from "../../assets/ProjectsImages/TarraleahLogo.png";
+
 import CurveLines from "../../assets/CurveLines.png";
 
 type Project = {
   title: string;
   description: string;
-  image: string;
+  mainImage: string;
   mobileImage?: string;
   logo: string;
-  blur: string;
+  blur?: string;
 };
 
 const projects: Project[] = [
   {
     title: "PASS Mobile App",
     description:
-      "Mobile application UI/UX design for a performance analysis and sports statistics app.",
-    image: PassImage,
+      "Mobile application UI/UX design for a performance analysis and sports statistics app. Designed for quick scanning and confident decision-making.",
+    mainImage: PassImage,
     logo: PassLogo,
-    blur: Blur1,
+    blur: CardBody,
   },
   {
-    title: "More Projects Coming",
+    title: "Evovolt — Test & Tag",
     description:
-      "This layout is ready to scale. Add new cards or convert into grid.",
-    image: DeltaImage,
-    mobileImage: DeltaMobile,
-    logo: DeltaLogo,
-    blur: Blur2,
+      "Business website for an Australian test & tagging service provider, built for clarity, conversion, and fast load times.",
+    mainImage: EvovoltImage,
+    mobileImage: EvovoltMobile,
+    logo: EvovoltLogo,
+    blur: CardBody,
   },
   {
-    title: "PASS Mobile App",
+    title: "Ezy Clean & Co PTY LTD",
     description:
-      "Mobile application UI/UX design for a performance analysis and sports statistics app.",
-    image: PassImage,
-    logo: PassLogo,
-    blur: Blur1,
+      "Business website for an Australian cleaning company, designed to be simple to navigate and optimized for enquiries.",
+    mainImage: EzycleanImage,
+    mobileImage: EzycleanMobile,
+    logo: EzycleanLogo,
+    blur: CardBody,
   },
   {
-    title: "More Projects Coming",
+    title: "Tarraleah Lodge",
     description:
-      "This layout is ready to scale. Add new cards or convert into grid.",
-    image: DeltaImage,
-    mobileImage: DeltaMobile,
-    logo: DeltaLogo,
-    blur: Blur2,
+      "Business website for an Australian cleaning company, designed to be simple to navigate and optimized for enquiries.",
+    mainImage: TarraleahImage,
+    mobileImage: TarraleahMobile,
+    logo: TarraleahLogo,
+    blur: CardBody,
   },
 ];
 
@@ -180,39 +190,82 @@ const Projects = () => {
     };
   };
 
-  const Card = ({ project }: { project: Project }) => (
+  const Card = ({ project }: { project: Project }) => {
+  return (
     <div
-      className="relative rounded-[32px] min-h-[480px] p-6 overflow-hidden
-      bg-white/10 backdrop-blur-2xl border border-white/10
-      shadow-[0_30px_100px_rgba(0,0,0,0.35)]"
+      className="
+        relative rounded-[20px] md:rounded-[28px] overflow-hidden
+        p-5 md:p-10
+        bg-[#0b1220]
+        shadow-[0_10px_40px_rgba(0,0,0,0.5)]
+        group
+      "
     >
+      {/* 🔥 BACKGROUND LIGHT GLOW */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={project.blur}
-          alt=""
-          className="w-full h-full object-cover opacity-50"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#081426]/70 via-[#081426]/80 to-[#081426]/90" />
+        <div className="absolute -top-20 -left-20 w-[300px] h-[300px] bg-blue-500/20 blur-[120px]" />
+        <div className="absolute bottom-[-80px] right-[-80px] w-[300px] h-[300px] bg-purple-500/20 blur-[120px]" />
       </div>
 
-      <div className="relative z-10">
-        <div className="absolute top-0 right-0">
-          <img src={project.logo} className="h-8 opacity-90" />
+      {/* 💡 RADIAL LIGHT SPOT */}
+      <div className="
+        absolute inset-0 z-0
+        bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.08),transparent_60%)]
+      " />
+
+      {/* ✨ SHINE EFFECT */}
+      <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+        <div className="
+          absolute -left-[120%] top-0 h-full w-[60%]
+          bg-gradient-to-r from-transparent via-white/10 to-transparent
+          skew-x-[-20deg]
+          group-hover:left-[120%]
+          transition-all duration-1000
+        " />
+      </div>
+
+      {/* CONTENT */}
+      <div className="relative z-20">
+        
+        {/* LOGO */}
+        {project.logo && (
+          <div className="absolute -top-2 -right-2 md:-top-6 md:-right-6 z-20 p-1.5 md:p-2">
+            <img
+              src={project.logo}
+              className="h-8 md:h-12 w-auto object-contain opacity-90"
+              alt="logo"
+            />
+          </div>
+        )}
+
+        {/* IMAGE */}
+        <div className="relative flex items-center justify-center h-[200px] md:h-[280px]">
+          <img
+            src={project.mainImage}
+            className="relative z-10 max-h-[180px] md:max-h-[240px] object-contain"
+          />
+
+          {project.mobileImage && (
+            <img
+              src={project.mobileImage}
+              className="absolute bottom-4 left-6 z-20 -translate-x-1/2 h-[120px] md:h-[160px] object-contain drop-shadow-xl opacity-90"
+            />
+          )}
         </div>
 
-        <div className="flex items-center justify-center h-[260px]">
-          <img src={project.image} className="h-64" />
-        </div>
-
-        <div className="mt-6 text-center">
-          <h3 className="text-xl font-semibold text-white mb-3">
+        {/* TEXT */}
+        <div className="mt-4 md:mt-6 text-center md:text-left">
+          <h3 className="text-white text-base md:text-xl font-semibold mb-1 md:mb-2">
             {project.title}
           </h3>
-          <p className="text-gray-300 text-sm">{project.description}</p>
+          <p className="text-gray-400 text-xs md:text-sm leading-relaxed max-w-md mx-auto md:mx-0">
+            {project.description}
+          </p>
         </div>
       </div>
     </div>
   );
+};
 
   return (
     <section id="projects-section" className="relative bg-[#081426]">
@@ -222,20 +275,21 @@ const Projects = () => {
       </div>
 
       <div className="text-center pt-20 pb-10">
-        <h2 className="text-5xl md:text-7xl text-white">
+        <h2 className="text-4xl md:text-7xl text-white">
           Recent Projects
         </h2>
       </div>
 
       {/* ✅ MOBILE VIEW */}
       {isMobile ? (
-        <div className="px-6 pb-20 flex flex-col gap-6">
+        <div className="px-4 sm:px-6 pb-16 flex flex-col gap-5">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
             >
               <Card project={project} />
             </motion.div>
@@ -269,11 +323,10 @@ const Projects = () => {
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`h-2.5 rounded-full ${
-                  activeIndex === index
+                className={`h-2.5 rounded-full ${activeIndex === index
                     ? "w-10 bg-white"
                     : "w-2.5 bg-white/30"
-                }`}
+                  }`}
               />
             ))}
           </div>
