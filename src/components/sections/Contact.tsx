@@ -51,40 +51,29 @@ const Contact = () => {
 
             // Prepare template parameters for main email
             const templateParams = {
-                user_name: values.fullName,
-                user_email: values.email,
+                fullName: values.fullName,
+                userEmail: values.email,
+                toEmail: 'indikabnuwarawewa@gmail.com',
                 phone: values.phone || 'Not provided',
-                company_name: values.company || 'Not provided',
+                companyName: values.company || 'Not provided',
                 title: messageLabels[values.message] || values.message,
-                to_email: 'hnishadisathsarani@gmail.com', // Your receiving email
             };
-
-            // Send main email to business
-            await emailjs.send(
-                serviceId,
-                templateId,
-                templateParams,
-                publicKey
-            );
 
             // Send auto-reply email to user
             const autoReplyParams = {
-                to_email: values.email, // Recipient's email
-                user_name: values.fullName,
-                user_email: values.email,
-                company_name: values.company || 'your company',
+                fullName: values.fullName,
+                sendersEmail: values.email,
                 phone: values.phone || 'Not provided',
-                message_type: messageLabels[values.message] || values.message,
+                companyName: values.company || 'your company',
+                title: messageLabels[values.message] || values.message,
             };
 
-            await emailjs.send(
-                serviceId,
-                autoReplyTemplateId,
-                autoReplyParams,
-                publicKey
-            );
+            await Promise.all([
+                emailjs.send(serviceId, templateId, templateParams, publicKey),
+                emailjs.send(serviceId, autoReplyTemplateId, autoReplyParams, publicKey)
+            ]);
 
-            message.success('Message sent successfully! We\'ll get back to you soon.');
+            message.success('Message sent successfully!');
             form.resetFields();
 
         } catch (error) {
