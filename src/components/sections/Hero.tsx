@@ -8,6 +8,7 @@ import swatchBg from "../../assets/Swatch.png";
 import frameBg from "../../assets/Frame.png";
 import logo from "../../assets/logo.png";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const stats = [
     {
@@ -29,6 +30,7 @@ const stats = [
 ];
 
 const Hero = () => {
+    const navigate = useNavigate()
     const panelRef = useRef<HTMLDivElement | null>(null);
     const [stripeCount, setStripeCount] = useState(12);
 
@@ -74,6 +76,16 @@ const Hero = () => {
 
         return () => window.removeEventListener("resize", updateStripes);
     }, []);
+
+    const handleNavigate = () => {
+    navigate("/projects");
+
+    // smooth scroll to top after navigation
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
+};
 
     return (
         <section className="relative w-full min-h-[100svh] overflow-hidden text-white">
@@ -368,7 +380,10 @@ const Hero = () => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            <Button className="bg-white text-blue-900 border-0 rounded-full px-6 h-10 flex items-center gap-2">
+                            <Button 
+                            className="bg-white text-blue-900 border-0 rounded-full px-6 h-10 flex items-center gap-2"
+                            onClick={handleNavigate}
+                            >
                                 Explore Our Work
                                 <ArrowRightOutlined />
                             </Button>
@@ -465,7 +480,10 @@ const Hero = () => {
                                 ease: "easeOut",
                             }}
                         >
-                            <Button className="bg-white text-blue-900 border-0 rounded-full px-6 h-10 flex items-center gap-2">
+                            <Button 
+                            className="bg-white text-blue-900 border-0 rounded-full px-6 h-10 flex items-center gap-2"
+                            onClick={handleNavigate}
+                            >
                                 Explore Our Work
                                 <ArrowRightOutlined />
                             </Button>

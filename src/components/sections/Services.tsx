@@ -7,7 +7,6 @@ import blueHolo3 from '../../assets/BlueHolo3.png';
 import blueHolo4 from '../../assets/BlueHolo4.png';
 import blueHole5 from '../../assets/BlueHolo5.png';
 import waveBackground from '../../assets/WaveBackground.png';
-import AnimatedCrossBanner from './Banner';
 
 // ✅ ANIMATION VARIANTS
 const containerVariants = {
@@ -260,8 +259,6 @@ const Services = () => {
                     </Row>
                 </section>
             </div>
-            <AnimatedCrossBanner />
-
         </>
     );
 };

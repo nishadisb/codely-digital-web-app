@@ -1,12 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import Hero from './components/sections/Hero';
 import Services from './components/sections/Services';
 import Projects from './components/sections/Projects';
-import Partners from './components/sections/Partners';
 import Contact from './components/sections/Contact';
-import Footer from './components/sections/Footer';
-import MenuPage from './components/MenuPage';
 import './App.css';
 import HomePage from './components/sections/HomePage';
 import Home from './components/sections/Home';
@@ -24,13 +20,11 @@ function AppContent() {
       <Header />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/menu" element={<MenuPage />} />
-          <Route path="/about" element={<Services />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<HomePage />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </AnimatePresence>
     </div>

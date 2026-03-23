@@ -33,7 +33,7 @@ const HomePage = () => {
     }, [controls]);
 
     const menuItems = [
-        { title: "Home", path: "/home" },
+        { title: "Home", path: "/" },
         // { title: "About Us", path: "/about" },
         { title: "What We Do", path: "/services" },
         // { title: "Recent Projects", path: "/projects", hasSub: true },
