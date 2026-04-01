@@ -5,6 +5,10 @@ import CardBody from "../../assets/ProjectsImages/CardBody.png";
 import PassImage from "../../assets/ProjectsImages/PassImage.png";
 import PassLogo from "../../assets/ProjectsImages/PassLogo.png";
 
+import DeltaImage from "../../assets/ProjectsImages/DeltaImage.png";
+import DeltaMobile from "../../assets/ProjectsImages/DeltaMobile.png";
+import DeltaLogo from "../../assets/ProjectsImages/DeltaLogo.png";
+
 import EvovoltImage from "../../assets/ProjectsImages/EvovoltImage.png";
 import EvovoltMobile from "../../assets/ProjectsImages/EvovoltMobile.png";
 import EvovoltLogo from "../../assets/ProjectsImages/EvovoltLogo.png";
@@ -26,6 +30,7 @@ type Project = {
   mobileImage?: string;
   logo: string;
   blur?: string;
+  reDirectUri?: string;
 };
 
 const projects: Project[] = [
@@ -36,6 +41,17 @@ const projects: Project[] = [
     mainImage: PassImage,
     logo: PassLogo,
     blur: CardBody,
+   
+  },
+    {
+    title: "More Projects Coming",
+    description:
+      "This layout is ready to scale. Add new cards, or convert this section into a filterable grid (Web / UI/UX / Mobile / Branding).",
+    mainImage: DeltaImage,
+    logo: DeltaLogo,
+    mobileImage: DeltaMobile,
+    blur: CardBody,
+    reDirectUri: "https://lightskyblue-dunlin-619010.hostingersite.com/",
   },
   {
     title: "Evovolt — Test & Tag",
@@ -45,6 +61,7 @@ const projects: Project[] = [
     mobileImage: EvovoltMobile,
     logo: EvovoltLogo,
     blur: CardBody,
+    reDirectUri: "https://evovolt.com.au/",
   },
   {
     title: "Ezy Clean & Co PTY LTD",
@@ -54,6 +71,7 @@ const projects: Project[] = [
     mobileImage: EzycleanMobile,
     logo: EzycleanLogo,
     blur: CardBody,
+    reDirectUri: "https://ezycleanco.com.au/",
   },
   {
     title: "Tarraleah Lodge",
@@ -63,6 +81,7 @@ const projects: Project[] = [
     mobileImage: TarraleahMobile,
     logo: TarraleahLogo,
     blur: CardBody,
+    reDirectUri: "https://tarraleah.com/",
   },
 ];
 
@@ -191,15 +210,24 @@ const Projects = () => {
   };
 
   const Card = ({ project }: { project: Project }) => {
+  const handleClick = () => {
+    if (project.reDirectUri) {
+      window.open(project.reDirectUri, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div
-      className="
+      onClick={handleClick}
+      className={`
         relative rounded-[20px] md:rounded-[28px] overflow-hidden
         p-5 md:p-10
         bg-[#0b1220]
         shadow-[0_10px_40px_rgba(0,0,0,0.5)]
         group
-      "
+        transition-transform
+        ${project.reDirectUri ? 'cursor-pointer hover:scale-[1.02]' : ''}
+      `}
     >
       {/* 🔥 BACKGROUND LIGHT GLOW */}
       <div className="absolute inset-0 z-0">
