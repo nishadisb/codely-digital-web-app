@@ -56,7 +56,7 @@ const Footer = () => {
             </div>
 
             {/* CONTENT */}
-            <div className="relative z-40 max-w-7xl mx-auto px-6 py-20 
+            <div className="relative z-40 max-w-7xl mx-auto px-6 py-10 
                 flex flex-col md:grid md:grid-cols-2 
                 min-h-[400px] md:min-h-[auto]">
 
@@ -66,7 +66,7 @@ const Footer = () => {
                         <p className="text-gray-400 text-sm uppercase tracking-widest">
                             CALL US NOW
                         </p>
-                        <p className="text-lg font-medium mt-1">
+                        <p className="text-md font-medium mt-1">
                             033 666 666 66
                         </p>
                     </div>
@@ -75,14 +75,26 @@ const Footer = () => {
                         <p className="text-gray-400 text-sm uppercase tracking-widest">
                             EMAIL
                         </p>
-                        <p className="text-lg font-medium mt-1">
+                        <p className="text-md font-medium mt-1">
                             info@codely.com.au
+                        </p>
+                    </div>
+
+                    <div>
+                        <p className="text-gray-400 text-sm uppercase tracking-widest">
+                            ADDRESS
+                        </p>
+                        <p className="text-md font-medium mt-1 mb-3">
+                            Codely Digital
+                            1/194, Cambridge Rd, Warrane, TAS 7018
+                            ABN 45 690 827 573
+                            ACN - 690 827 573
                         </p>
                     </div>
                 </div>
 
                 {/* RIGHT CONTENT */}
-                <div className="flex flex-col items-end text-right space-y-4 mt-auto md:mt-0 md:items-end md:text-right">
+                <div className="flex flex-col items-end text-right space-y-4 mt-auto md:mt-0 md:items-end md:text-right self-center">
 
                     <motion.div
                         className="flex items-center gap-3"
